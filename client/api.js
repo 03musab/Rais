@@ -14,10 +14,6 @@ router.post('/contact', (req, res) => {
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Please provide name, email, and message.' });
   }
-
-  // TODO: Implement email sending service (e.g., Nodemailer)
-  console.log('Contact Form Submission:', { name, email, message });
-
   res.status(200).json({ message: 'Message received successfully!' });
 });
 

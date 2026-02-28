@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const reviewsContainer = document.querySelector('.reviews-grid');
     const reviewForm = document.querySelector('.review-form-section form');
-    
-    // If running locally, use localhost. If deployed, use your production server URL.
-    // TODO: Replace 'https://your-deployed-api.com' with your actual backend URL after hosting.
     const API_URL = '/api/reviews';
 
     // 1. Load reviews on page load
@@ -18,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(API_URL);
             if (!response.ok) throw new Error('Failed to fetch reviews');
-            
+
             const reviews = await response.json();
             renderReviews(reviews);
         } catch (error) {
@@ -118,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper to prevent XSS injection
     function escapeHtml(text) {
         if (!text) return '';
-        return text.replace(/[&<>"']/g, function(m) {
+        return text.replace(/[&<>"']/g, function (m) {
             return {
                 '&': '&amp;',
                 '<': '&lt;',
