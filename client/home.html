@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rais Embroidery Works</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #800020; /* Burgundy */
+            --secondary-color: #d4af37; /* Gold */
+            --text-color: #333;
+            --bg-color: #fdfbf7; /* Cream */
+            --white: #ffffff;
+            --fabric-pattern: radial-gradient(#e0e0e0 1px, transparent 1px);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: var(--fabric-pattern);
+            background-size: 20px 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+        }
+
+        /* Hero Banner */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(rgba(40, 0, 10, 0.7), rgba(40, 0, 10, 0.6)), url('https://images.unsplash.com/photo-1625585668843-2d24495125d3?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            border-bottom: 5px solid var(--secondary-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Decorative stitch line at bottom of hero */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--secondary-color) 0, var(--secondary-color) 10px, transparent 10px, transparent 20px);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin: 0;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+            border-bottom: 2px dashed rgba(212, 175, 55, 0.5);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 0 0 2.5rem;
+            font-style: italic;
+            letter-spacing: 1px;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.2s forwards;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.4s forwards;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border: 2px solid var(--secondary-color);
+            background: transparent;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--secondary-color);
+            transition: width 0.2s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn-filled {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-filled:hover {
+            background: #fff;
+            border-color: #fff;
+            color: var(--primary-color);
+        }
+        .btn-filled::before {
+            background: #fff;
+        }
+
+        /* Entry Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes stitchGrow {
+            to { width: 100%; }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px) scale(0.95); /* Bigger movement and scale */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Embroidery Separator Animation */
+        .embroidery-separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2.5rem;
+        }
+
+        .stitch-line {
+            width: 120px;
+            height: 2px;
+            position: relative;
+        }
+
+        .stitch-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            border-bottom: 2px dashed var(--secondary-color);
+            transition: width 0.8s ease-out;
+        }
+
+        .stitch-line.left::after {
+            left: 0; /* Grows from left to right (towards center) */
+        }
+
+        .stitch-line.right::after {
+            right: 0; /* Grows from right to left (towards center) */
+        }
+
+        /* Trigger stitch animation when parent is active */
+        .reveal.active .stitch-line::after {
+            animation: stitchGrow 0.8s ease-out 0.1s forwards;
+        }
+
+        .knot {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            opacity: 0;
+        }
+
+        /* Trigger knot animation when parent is active */
+        .reveal.active .knot {
+            animation: fadeIn 0.4s ease-out 0.9s forwards;
+        }
+
+        /* Brand Introduction */
+        .intro {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Intro Layout */
+        .intro-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .intro-text {
+            text-align: center;
+        }
+
+        .intro-images {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+        }
+
+        .intro-img {
+            position: absolute;
+            width: 70%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, z-index 0s;
+        }
+
+        .intro-img.main {
+            top: 0;
+            left: 0;
+            z-index: 1;
+            border: 5px solid #fff;
+        }
+
+        .intro-img.secondary {
+            bottom: 0;
+            right: 0;
+            z-index: 2;
+            border: 5px solid var(--secondary-color);
+        }
+
+        .intro-img:hover {
+            transform: scale(1.05);
+            z-index: 3;
+        }
+
+        @media (min-width: 900px) {
+            .intro-container {
+                flex-direction: row;
+                align-items: center;
+            }
+            .intro-text {
+                flex: 1;
+                text-align: left;
+                padding-right: 2rem;
+            }
+            .intro-images {
+                flex: 1;
+            }
+            /* Align separator to left on desktop */
+            .intro-text .embroidery-separator {
+                justify-content: flex-start;
+            }
+            .intro-text h2::after {
+                margin-left: 0;
+            }
+        }
+
+        .intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .intro h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 15px auto 0;
+        }
+
+        .intro p {
+            font-size: 1.25rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Why Choose Us */
+        .features {
+            padding: 6rem 2rem;
+            background-color: var(--white);
+            text-align: center;
+            border-top: 1px dashed #ddd;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .features h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            padding: 2.5rem;
+            border: 2px dashed var(--secondary-color); /* Stitching effect */
+            border-radius: 12px;
+            background: var(--bg-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            background: #fff;
+            border-style: solid;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 6rem 2rem;
+            background-color: #f8f3eb; /* Slightly darker cream */
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Call to Action */
+        .cta {
+            background-color: var(--primary-color);
+            /* Subtle pattern overlay */
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e1b32' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .cta h2 {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            margin: 0.5rem;
+            display: inline-block;
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .cta .btn:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        .cta .btn-filled {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .cta .btn-filled:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            border-color: var(--white);
+        }
+
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>Rais Embroidery Works</h1>
+        <p>Premium Embroidery & Tailoring Craft</p>
+        <div class="btn-group">
+            <a href="services.html" class="btn btn-filled">View Services</a>
+            <a href="contact.html" class="btn">Contact Us</a>
+            <a href="https://instagram.com" target="_blank" class="btn">Instagram</a>
+        </div>
+    </header>
+
+    <section class="intro">
+        <div class="intro-container">
+            <div class="intro-text">
+                <h2 class="reveal">Our Craftsmanship</h2>
+                <p class="reveal">At Rais Embroidery Works, we blend timeless tradition with modern artistry. Our dedication to the needle and thread ensures that every piece we create is not just a garment, but a work of art. Experience the elegance of bespoke tailoring and intricate embroidery designed to perfection.</p>
+                <div class="embroidery-separator reveal">
+                    <div class="stitch-line left"></div>
+                    <div class="knot"><i class="fas fa-certificate"></i></div>
+                    <div class="stitch-line right"></div>
+                </div>
+            </div>
+            <div class="intro-images reveal">
+                <!-- Image 1: Close up of embroidery/sewing -->
+                <img src="https://images.unsplash.com/photo-1617325247661-675ab4b64ae8?auto=format&fit=crop&w=600&q=80" class="intro-img main" alt="Detailed Embroidery">
+                <!-- Image 2: Tailoring/Measuring -->
+                <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=600&q=80" class="intro-img secondary" alt="Tailoring Process">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="reveal">Why Choose Us</h2>
+        <div class="grid">
+            <div class="card reveal" style="transition-delay: 0.1s;">
+                <h3><i class="fas fa-cut"></i> Quality Stitching</h3>
+                <p>We use premium threads and techniques to ensure every stitch is durable and flawless.</p>
+            </div>
+            <div class="card reveal" style="transition-delay: 0.2s;">
+                <h3><i class="fas fa-search-plus"></i> Fine Detailing</h3>
+                <p>Our artisans pay attention to the smallest details, creating intricate patterns that stand out.</p>
+            </div>
+            <div class="card reveal" style="transition-delay: 0.3s;">
+                <h3><i class="fas fa-handshake"></i> Customer Trust</h3>
+                <p>Built on years of reliability, we pride ourselves on delivering exactly what our customers envision.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <h2 class="reveal">Recent Masterpieces</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item reveal" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80" alt="Elegant Dress">
+            </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80" alt="Fabric Texture">
+            </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1550926720-745b6412d566?auto=format&fit=crop&w=600&q=80" alt="Sewing Machine Art">
+            </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.4s;">
+                <img src="https://images.unsplash.com/photo-1520367288098-2792e80e12a1?auto=format&fit=crop&w=600&q=80" alt="Colorful Threads">
+            </div>
+        </div>
+    </section>
+
+    <footer class="cta">
+        <h2 class="reveal">Get in Touch</h2>
+        <p class="reveal">Ready to start your project? Contact us today.</p>
+        <div class="reveal">
+            <a href="https://wa.me/919867810550" class="btn btn-filled">WhatsApp Us</a>
+            <a href="tel:9867810550" class="btn">Call 9867810550</a>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="responsive.css">
+    <script src="navbar.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>

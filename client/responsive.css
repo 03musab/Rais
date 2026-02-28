@@ -1,0 +1,245 @@
+/* Mobile Optimization & Spacing */
+
+/* Ensure padding and borders are included in width */
+* {
+    box-sizing: border-box;
+}
+
+/* Smooth scrolling and scroll padding for sticky navbar */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+/* Prevent horizontal scrolling on small screens */
+html, body {
+    overflow-x: hidden;
+}
+
+/* Shared Navbar Styles */
+.shared-navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #800020;
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 25px;
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.active {
+    color: #d4af37;
+}
+
+.mobile-menu-btn {
+    display: none;
+}
+
+/* Transparent Navbar for Homepage */
+.shared-navbar.home-navbar {
+    position: fixed;
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shared-navbar.home-navbar .nav-brand,
+.shared-navbar.home-navbar .nav-menu li a,
+.shared-navbar.home-navbar .mobile-menu-btn {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Dark text for light hero backgrounds (About, Contact, Reviews) */
+.shared-navbar.home-navbar.dark-text .nav-brand,
+.shared-navbar.home-navbar.dark-text .nav-menu li a,
+.shared-navbar.home-navbar.dark-text .mobile-menu-btn {
+    color: #333;
+    text-shadow: none;
+}
+
+/* Scrolled State (Solid) */
+.shared-navbar.home-navbar.scrolled {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.shared-navbar.home-navbar.scrolled .nav-brand {
+    color: #800020;
+    text-shadow: none;
+}
+
+.shared-navbar.home-navbar.scrolled .nav-menu li a,
+.shared-navbar.home-navbar.scrolled .mobile-menu-btn {
+    color: #333;
+    text-shadow: none;
+}
+
+/* Ensure content isn't hidden behind fixed navbar on inner pages */
+.page-header, section.hero {
+    padding-top: 100px !important;
+}
+
+/* Mobile Media Query */
+@media (max-width: 768px) {
+    /* Improve Readability */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+
+    /* Optimize Spacing */
+    .container, section, header, footer {
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 100%;
+    }
+
+    /* Navbar Mobile Styles */
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #333;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav-menu.show {
+        display: flex;
+    }
+
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .nav-menu li a {
+        display: block;
+        padding: 15px;
+    }
+
+    /* Improve Button Sizes for Touch */
+    button, .btn, .submit-btn, input[type="submit"] {
+        min-height: 48px; /* Minimum touch target size */
+        padding: 12px 24px;
+        font-size: 1rem;
+        width: 100%; /* Full width buttons are easier to tap */
+        margin-bottom: 10px;
+    }
+
+    /* Form Inputs (Prevent iOS zoom) */
+    input, textarea, select {
+        font-size: 16px !important;
+        padding: 12px;
+        width: 100%;
+    }
+
+    /* Reviews Grid - Single Column */
+    .reviews-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+
+    /* Ensure mobile menu links are dark even on transparent navbar */
+    .shared-navbar.home-navbar .nav-menu li a {
+        color: #333;
+        text-shadow: none;
+    }
+}
+
+/* Sticky WhatsApp Button Styles */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.1);
+    color: #FFF;
+}
+
+/* Shared Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}

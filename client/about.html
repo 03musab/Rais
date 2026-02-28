@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Rais Embroidery Works</title>
+    <style>
+        :root {
+            --primary-color: #800020; /* Burgundy */
+            --secondary-color: #d4af37; /* Gold */
+            --text-color: #333;
+            --bg-color: #fdfbf7; /* Cream */
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 4px double var(--secondary-color);
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin: 0;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        .text-content {
+            font-size: 1.1rem;
+            text-align: justify;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border: 1px dashed var(--primary-color);
+            border-radius: 4px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .card h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>About Rais Embroidery Works</h1>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title reveal">Our Story</h2>
+            <div class="text-content reveal">
+                <p>Rais Embroidery Works was founded on the principles of heritage and dedication. What started as a small family workshop has blossomed into a center for exquisite embroidery and tailoring. Our journey is stitched with the stories of countless satisfied clients who value the human touch in an automated world. We honor the traditions of the past while weaving them into the fabric of the future.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title reveal">Experience & Craftsmanship</h2>
+            <div class="text-content reveal">
+                <p>With decades of collective experience, our artisans are masters of the needle. Craftsmanship is not just a skill for us; it is a discipline. Every garment that enters our workshop is treated with the utmost respect and attention to detail. From selecting the finest threads to the final quality check, our process ensures that every piece is a masterpiece of durability and elegance.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title reveal">Core Values</h2>
+            <div class="grid">
+                <div class="card reveal" style="transition-delay: 0.1s;">
+                    <h3>Quality Stitching</h3>
+                    <p>We believe that the strength of a garment lies in its seams. Our stitching is robust, precise, and built to last.</p>
+                </div>
+                <div class="card reveal" style="transition-delay: 0.2s;">
+                    <h3>Fine Detailing</h3>
+                    <p>Beauty is in the details. We obsess over the small elements that elevate a simple design to a work of art.</p>
+                </div>
+                <div class="card reveal" style="transition-delay: 0.3s;">
+                    <h3>Customer Trust</h3>
+                    <p>Our reputation is our most valuable asset. We earn your trust through transparency, reliability, and excellence.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title reveal">Types of Embroidery</h2>
+            <div class="grid">
+                <div class="card reveal" style="transition-delay: 0.1s;">
+                    <h3>Hand Embroidery</h3>
+                    <p>Intricate, time-honored techniques that add a personal, soulful touch to your garments.</p>
+                </div>
+                <div class="card reveal" style="transition-delay: 0.2s;">
+                    <h3>Machine Embroidery</h3>
+                    <p>High-precision designs perfect for uniform patterns and complex, modern aesthetics.</p>
+                </div>
+                <div class="card reveal" style="transition-delay: 0.3s;">
+                    <h3>Logo Embroidery</h3>
+                    <p>Professional branding solutions that make your corporate identity stand out on any fabric.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <link rel="stylesheet" href="responsive.css">
+    <script src="navbar.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>

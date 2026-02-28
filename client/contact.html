@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Rais Embroidery Works</title>
+    <style>
+        :root {
+            --primary-color: #800020; /* Burgundy */
+            --secondary-color: #d4af37; /* Gold */
+            --text-color: #333;
+            --bg-color: #fdfbf7; /* Cream */
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 4px double var(--secondary-color);
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin: 0;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Contact Layout */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1.5fr;
+            }
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px dashed var(--secondary-color); /* Stitching effect */
+            height: fit-content;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: var(--bg-color);
+            border: 2px dotted var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-details a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-details a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Form */
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 14px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            border-bottom: 3px solid #500014;
+        }
+
+        .btn-submit:hover {
+            background-color: #600018;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>Contact Us</h1>
+        </header>
+
+        <div class="contact-grid">
+            <!-- Contact Info Side -->
+            <div class="info-card reveal">
+                <div class="contact-item">
+                    <div class="icon-box">📞</div>
+                    <div class="contact-details">
+                        <h3>Phone</h3>
+                        <a href="tel:9867810550">+91 98678 10550</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="icon-box">💬</div>
+                    <div class="contact-details">
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/919867810550" target="_blank">Chat on WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="icon-box">✉️</div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <a href="mailto:musabimp.0@gmail.com">musabimp.0@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="icon-box">📷</div>
+                    <div class="contact-details">
+                        <h3>Instagram</h3>
+                        <a href="https://instagram.com" target="_blank">@raisembroidery</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form Side -->
+            <div class="contact-form reveal" style="transition-delay: 0.2s;">
+                <h2 style="margin-top: 0; margin-bottom: 1.5rem; text-align: center;">Send a Message</h2>
+                <form action="/api/contact" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" name="name" class="form-input" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-input" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-textarea" required placeholder="Tell us about your embroidery needs..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="responsive.css">
+    <script src="navbar.js"></script>
+    <script src="animations.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>

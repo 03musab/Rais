@@ -1,0 +1,19 @@
+services:
+  # Backend Service
+  - type: web
+    name: rais-server
+    env: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  # Frontend Service
+  - type: web
+    name: rais-client
+    env: node
+    rootDir: intro-rais-embroidery-works
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start

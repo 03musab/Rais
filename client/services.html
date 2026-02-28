@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Rais Embroidery Works</title>
+    <style>
+        :root {
+            --primary-color: #800020; /* Burgundy */
+            --secondary-color: #d4af37; /* Gold */
+            --text-color: #333;
+            --bg-color: #fdfbf7; /* Cream */
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 4px double var(--secondary-color);
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--secondary-color);
+        }
+
+        .service-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .card-content h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+        }
+
+        .card-content p {
+            margin-bottom: 0;
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>Our Services</h1>
+        </header>
+
+        <section class="services-grid">
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1617325247661-675ab4b64ae8?auto=format&fit=crop&w=600&q=80" alt="Custom Embroidery" class="service-img">
+                <div class="card-content">
+                    <h3>Custom Embroidery</h3>
+                    <p>Bring your unique ideas to life with our bespoke embroidery service on any fabric.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1565373676955-f7294e829a8e?auto=format&fit=crop&w=600&q=80" alt="Logo Embroidery" class="service-img">
+                <div class="card-content">
+                    <h3>Logo Embroidery</h3>
+                    <p>Professional, high-quality logo stitching for corporate uniforms, caps, and merchandise.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1459745930869-b3d0d72c3cbb?auto=format&fit=crop&w=600&q=80" alt="Handcrafted Designs" class="service-img">
+                <div class="card-content">
+                    <h3>Handcrafted Designs</h3>
+                    <p>Traditional hand-embroidery techniques that add an artistic and personal touch.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80" alt="Saree Fall & Pico" class="service-img">
+                <div class="card-content">
+                    <h3>Saree Fall & Pico</h3>
+                    <p>Essential finishing services to ensure your saree drapes perfectly and lasts longer.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=600&q=80" alt="Dress Stitching" class="service-img">
+                <div class="card-content">
+                    <h3>Dress Stitching</h3>
+                    <p>Custom tailoring for dresses, ensuring a perfect fit and flattering silhouette.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1550926720-745b6412d566?auto=format&fit=crop&w=600&q=80" alt="Alteration Services" class="service-img">
+                <div class="card-content">
+                    <h3>Alteration Services</h3>
+                    <p>Expert resizing and adjustments to give your existing wardrobe a new lease on life.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80" alt="Uniform Embroidery" class="service-img">
+                <div class="card-content">
+                    <h3>Uniform Embroidery</h3>
+                    <p>Durable and consistent embroidery solutions for school and staff uniforms.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1605218427368-35b0f996d916?auto=format&fit=crop&w=600&q=80" alt="Machine Embroidery" class="service-img">
+                <div class="card-content">
+                    <h3>Machine Embroidery</h3>
+                    <p>Precision machine work ideal for intricate patterns and larger volume orders.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <link rel="stylesheet" href="responsive.css">
+    <script src="navbar.js"></script>
+</body>
+</html>
