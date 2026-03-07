@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="reviews.html">Reviews</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (nav && heroSection) {
         nav.classList.add('home-navbar');
-        
+
         // If not the main homepage hero, use dark text for transparent state
         if (!heroSection.matches('header.hero')) {
             nav.classList.add('dark-text');

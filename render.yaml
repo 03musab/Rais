@@ -1,7 +1,7 @@
 services:
-  # Backend Service
+  # Backend + Frontend (Express serves static HTML)
   - type: web
-    name: rais-server
+    name: rais-embroidery
     env: node
     rootDir: server
     buildCommand: npm install
@@ -9,11 +9,3 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-
-  # Frontend Service
-  - type: web
-    name: rais-client
-    env: node
-    rootDir: intro-rais-embroidery-works
-    buildCommand: npm install --include=dev && npm run build
-    startCommand: npm start

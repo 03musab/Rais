@@ -1,165 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Rais Embroidery Works</title>
+    <meta name="description"
+        content="Explore our full range of embroidery and tailoring services at Rais Embroidery Works. Custom embroidery, dress stitching, logo work, saree fall & pico, and more.">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --primary-color: #800020; /* Burgundy */
-            --secondary-color: #d4af37; /* Gold */
-            --text-color: #333;
-            --bg-color: #fdfbf7; /* Cream */
+            --primary: #800020;
+            --secondary: #d4af37;
+            --bg: #fdfbf7;
             --white: #ffffff;
+            --text: #333;
+            --muted: #666;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
         }
 
-        h1, h2, h3 {
-            font-family: 'Georgia', serif;
-            color: var(--primary-color);
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            color: var(--primary);
         }
 
-        .container {
+        /* ── Page Hero ── */
+        .page-hero {
+            position: relative;
+            background: linear-gradient(135deg, #4a0012 0%, #800020 50%, #a00028 100%);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.06'%3E%3Ccircle cx='20' cy='20' r='3'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--secondary);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .page-hero p {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 0.8rem;
+            letter-spacing: 1.5px;
+            position: relative;
+        }
+
+        .hero-ornament {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+
+        .hero-ornament span {
+            display: block;
+            height: 1px;
+            width: 60px;
+            background: linear-gradient(90deg, transparent, var(--secondary));
+        }
+
+        .hero-ornament span:last-child {
+            background: linear-gradient(90deg, var(--secondary), transparent);
+        }
+
+        .hero-ornament i {
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+
+        /* ── Services Container ── */
+        .services-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 4rem 2rem;
         }
 
-        .page-header {
+        .section-intro {
             text-align: center;
-            padding: 3rem 0;
-            border-bottom: 4px double var(--secondary-color);
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
 
-        .page-header h1 {
-            font-size: 3rem;
-            margin: 0;
+        .section-intro h2 {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
         }
 
+        .section-intro p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .gold-rule {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            margin: 1.2rem auto 0;
+        }
+
+        .gold-rule::before,
+        .gold-rule::after {
+            content: '';
+            flex: 1;
+            max-width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+        }
+
+        .gold-rule i {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ── Service Grid ── */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
         }
 
+        /* ── Service Card ── */
         .service-card {
             background: var(--white);
-            border-radius: 8px;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(128, 0, 32, 0.12);
+            border-color: var(--secondary);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            height: 210px;
+            overflow: hidden;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .card-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--primary);
+            color: var(--secondary);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        .card-icon {
+            position: absolute;
+            bottom: -18px;
+            right: 18px;
+            width: 46px;
+            height: 46px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+            font-size: 1.1rem;
+            color: var(--primary);
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: 2rem 1.5rem 1.5rem;
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--secondary-color);
+        .card-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
         }
 
-        .service-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
+        .card-body p {
+            color: var(--muted);
+            font-size: 0.97rem;
+            flex: 1;
+            margin-bottom: 1.2rem;
         }
 
-        .card-content {
-            padding: 1.5rem;
-            text-align: center;
-            flex-grow: 1;
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 1rem 1.5rem;
+            border-top: 1px dashed rgba(212, 175, 55, 0.35);
         }
 
-        .card-content h3 {
-            margin-top: 0;
-            font-size: 1.4rem;
-            color: var(--primary-color);
+        /* ── WhatsApp Enquire Button ── */
+        .btn-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 18px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 10px rgba(37, 211, 102, 0.35);
         }
 
-        .card-content p {
-            margin-bottom: 0;
+        .btn-wa:hover {
+            background: #1ebe5d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+        }
+
+        .btn-wa i {
             font-size: 1rem;
-            color: #555;
+        }
+
+        /* ── Bottom CTA Banner ── */
+        .cta-banner {
+            background: linear-gradient(135deg, #4a0012, #800020);
+            border-top: 4px solid var(--secondary);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: #fff;
+            margin-top: 2rem;
+        }
+
+        .cta-banner h2 {
+            color: var(--secondary);
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-banner p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-wa-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 34px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn-wa-large:hover {
+            background: #1ebe5d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-wa-large i {
+            font-size: 1.3rem;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .btn-wa {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header class="page-header">
-            <h1>Our Services</h1>
-        </header>
 
-        <section class="services-grid">
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1617325247661-675ab4b64ae8?auto=format&fit=crop&w=600&q=80" alt="Custom Embroidery" class="service-img">
-                <div class="card-content">
+<body>
+
+    <!-- Navbar injected by navbar.js -->
+
+    <!-- Page Hero -->
+    <header class="page-header">
+        <div class="page-hero">
+            <div class="hero-ornament">
+                <span></span>
+                <i class="fas fa-scissors"></i>
+                <span></span>
+            </div>
+            <h1>Our Services</h1>
+            <p>Crafted with precision &amp; passion — every stitch tells a story</p>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <main class="services-container">
+        <div class="section-intro reveal">
+            <h2>What We Offer</h2>
+            <p>From intricate hand embroidery to precise machine stitching — we bring your vision to life with care.</p>
+            <div class="gold-rule"><i class="fas fa-gem"></i></div>
+        </div>
+
+        <div class="services-grid">
+
+            <!-- 1. Custom Embroidery -->
+            <div class="service-card reveal">
+                <div class="card-img-wrap">
+                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.42%20PM.jpeg" alt="Custom Embroidery"
+                        loading="lazy">
+                    <span class="card-badge">Popular</span>
+                    <div class="card-icon"><i class="fas fa-star"></i></div>
+                </div>
+                <div class="card-body">
                     <h3>Custom Embroidery</h3>
-                    <p>Bring your unique ideas to life with our bespoke embroidery service on any fabric.</p>
+                    <p>Bring your unique ideas to life with our bespoke embroidery service. We work on any fabric — from
+                        casual wear to bridal pieces.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Custom%20Embroidery.%20Can%20you%20tell%20me%20more%3F"
+                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                 </div>
             </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1565373676955-f7294e829a8e?auto=format&fit=crop&w=600&q=80" alt="Logo Embroidery" class="service-img">
-                <div class="card-content">
+
+            <!-- 2. Logo Embroidery -->
+            <div class="service-card reveal">
+                <div class="card-img-wrap">
+                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.45%20PM.jpeg" alt="Logo Embroidery"
+                        loading="lazy">
+                    <span class="card-badge">Corporate</span>
+                    <div class="card-icon"><i class="fas fa-building"></i></div>
+                </div>
+                <div class="card-body">
                     <h3>Logo Embroidery</h3>
-                    <p>Professional, high-quality logo stitching for corporate uniforms, caps, and merchandise.</p>
+                    <p>Professional, high-quality logo stitching for corporate uniforms, caps, bags, and branded
+                        merchandise. Bulk orders welcome.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Logo%20Embroidery.%20Can%20you%20tell%20me%20more%3F"
+                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                 </div>
             </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1459745930869-b3d0d72c3cbb?auto=format&fit=crop&w=600&q=80" alt="Handcrafted Designs" class="service-img">
-                <div class="card-content">
+
+            <!-- 3. Handcrafted Designs -->
+            <div class="service-card reveal">
+                <div class="card-img-wrap">
+                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.46%20PM.jpeg" alt="Handcrafted Designs"
+                        loading="lazy">
+                    <span class="card-badge">Artisan</span>
+                    <div class="card-icon"><i class="fas fa-hands"></i></div>
+                </div>
+                <div class="card-body">
                     <h3>Handcrafted Designs</h3>
-                    <p>Traditional hand-embroidery techniques that add an artistic and personal touch.</p>
+                    <p>Traditional hand-embroidery techniques — mirror work, zardozi, thread art — adding an artistic
+                        and personal touch to every piece.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Handcrafted%20Designs.%20Can%20you%20tell%20me%20more%3F"
+                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                 </div>
             </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80" alt="Saree Fall & Pico" class="service-img">
-                <div class="card-content">
-                    <h3>Saree Fall & Pico</h3>
-                    <p>Essential finishing services to ensure your saree drapes perfectly and lasts longer.</p>
+
+
+
+            <!-- 5. Dress Stitching -->
+            <div class="service-card reveal">
+                <div class="card-img-wrap">
+                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.46%20PM%20(2).jpeg" alt="Dress Stitching"
+                        loading="lazy">
+                    <span class="card-badge">Popular</span>
+                    <div class="card-icon"><i class="fas fa-tshirt"></i></div>
                 </div>
-            </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=600&q=80" alt="Dress Stitching" class="service-img">
-                <div class="card-content">
+                <div class="card-body">
                     <h3>Dress Stitching</h3>
-                    <p>Custom tailoring for dresses, ensuring a perfect fit and flattering silhouette.</p>
+                    <p>Custom tailoring for dresses, salwar suits, and churidars — ensuring a perfect fit and flattering
+                        silhouette tailored just for you.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Dress%20Stitching.%20Can%20you%20tell%20me%20more%3F"
+                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                 </div>
             </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1550926720-745b6412d566?auto=format&fit=crop&w=600&q=80" alt="Alteration Services" class="service-img">
-                <div class="card-content">
+
+            <!-- 6. Alteration Services -->
+            <div class="service-card reveal">
+                <div class="card-img-wrap">
+                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.46%20PM%20(3).jpeg" alt="Alteration Services"
+                        loading="lazy">
+                    <div class="card-icon"><i class="fas fa-ruler"></i></div>
+                </div>
+                <div class="card-body">
                     <h3>Alteration Services</h3>
-                    <p>Expert resizing and adjustments to give your existing wardrobe a new lease on life.</p>
+                    <p>Expert resizing, hemming, and adjustments to give your existing wardrobe a perfect new fit and a
+                        fresh lease on life.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Alteration%20Services.%20Can%20you%20tell%20me%20more%3F"
+                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                 </div>
             </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80" alt="Uniform Embroidery" class="service-img">
-                <div class="card-content">
+
+            <!-- 7. Uniform Embroidery -->
+            <div class="service-card reveal">
+                <div class="card-img-wrap">
+                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.47%20PM.jpeg" alt="Uniform Embroidery"
+                        loading="lazy">
+                    <span class="card-badge">Bulk</span>
+                    <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+                </div>
+                <div class="card-body">
                     <h3>Uniform Embroidery</h3>
-                    <p>Durable and consistent embroidery solutions for school and staff uniforms.</p>
+                    <p>Durable and consistent embroidery solutions for school uniforms, staff shirts, and institutional
+                        garments at competitive bulk rates.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Uniform%20Embroidery.%20Can%20you%20tell%20me%20more%3F"
+                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                 </div>
             </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1605218427368-35b0f996d916?auto=format&fit=crop&w=600&q=80" alt="Machine Embroidery" class="service-img">
-                <div class="card-content">
+
+            <!-- 8. Machine Embroidery -->
+            <div class="service-card reveal">
+                <div class="card-img-wrap">
+                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.47%20PM%20(1).jpeg" alt="Machine Embroidery"
+                        loading="lazy">
+                    <div class="card-icon"><i class="fas fa-cog"></i></div>
+                </div>
+                <div class="card-body">
                     <h3>Machine Embroidery</h3>
-                    <p>Precision machine work ideal for intricate patterns and larger volume orders.</p>
+                    <p>Precision machine work ideal for intricate patterns, repeated designs, and larger volume orders
+                        with consistent quality throughout.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Machine%20Embroidery.%20Can%20you%20tell%20me%20more%3F"
+                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                 </div>
             </div>
-        </section>
-    </div>
+
+        </div><!-- /services-grid -->
+    </main>
+
+    <!-- Bottom CTA -->
+    <section class="cta-banner">
+        <h2>Have a Custom Request?</h2>
+        <p>Tell us what you have in mind — we'll make it happen.</p>
+        <a href="https://wa.me/919867810550?text=Hi!%20I%20have%20a%20custom%20requirement%20I%E2%80%99d%20like%20to%20discuss."
+            class="btn-wa-large" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Chat with Us on WhatsApp
+        </a>
+    </section>
+
     <link rel="stylesheet" href="responsive.css">
     <script src="navbar.js"></script>
+    <script src="whatsapp.js"></script>
+    <script>
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('active'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
 </body>
+
 </html>

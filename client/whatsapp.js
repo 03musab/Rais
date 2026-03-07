@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Configuration
-    const phoneNumber = '1234567890'; // Replace with your actual business number
+    const phoneNumber = '919867810550';
     const message = 'Hello! I would like to inquire about your embroidery services.';
 
     // Create button element

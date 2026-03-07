@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Rais Embroidery Works</title>
+    <meta name="description"
+        content="Browse our work gallery — custom embroidery, tailoring, logo stitching, and handcrafted designs by Rais Embroidery Works.">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  HOW TO REPLACE WITH YOUR OWN PHOTOS                    ║
+    ╠══════════════════════════════════════════════════════════╣
+    ║  1. Drop your images inside the  client/images/  folder  ║
+    ║  2. In each gallery-item below, change the src="..."    ║
+    ║     to your file name, e.g. src="images/my-work-1.jpg"  ║
+    ║  3. Update the data-title and data-category too         ║
+    ╚══════════════════════════════════════════════════════════╝
+    -->
+
+    <style>
+        :root {
+            --primary: #800020;
+            --secondary: #d4af37;
+            --bg: #fdfbf7;
+            --white: #ffffff;
+            --text: #333;
+            --muted: #666;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            color: var(--primary);
+        }
+
+        /* ── Page Hero ── */
+        .page-hero {
+            position: relative;
+            background: linear-gradient(135deg, #4a0012 0%, #800020 50%, #a00028 100%);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            border-bottom: 4px solid var(--secondary);
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.06'%3E%3Ccircle cx='20' cy='20' r='3'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-ornament {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+
+        .hero-ornament span {
+            display: block;
+            height: 1px;
+            width: 60px;
+            background: linear-gradient(90deg, transparent, var(--secondary));
+        }
+
+        .hero-ornament span:last-child {
+            background: linear-gradient(90deg, var(--secondary), transparent);
+        }
+
+        .hero-ornament i {
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--secondary);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .page-hero p {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 0.8rem;
+            letter-spacing: 1.5px;
+            position: relative;
+        }
+
+        /* ── Portfolio Main ── */
+        .portfolio-main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem 4rem;
+        }
+
+        /* ── Filter Bar ── */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 8px 22px;
+            border: 2px solid var(--secondary);
+            background: transparent;
+            color: var(--primary);
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+        }
+
+        /* ── Gallery Grid ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        /* ── Gallery Item ── */
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            background: #ede8df;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .gallery-item.filtered-out,
+        .gallery-item.page-hidden {
+            display: none !important;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.14);
+            border-color: var(--secondary);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.07);
+        }
+
+        /* Hover overlay with title */
+        .item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(64, 0, 16, 0.88) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.1rem;
+        }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .item-overlay h3 {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.2rem;
+        }
+
+        .item-overlay span {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-overlay .zoom-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 34px;
+            height: 34px;
+            background: rgba(212, 175, 55, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 0.85rem;
+        }
+
+        /* Empty state */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--muted);
+            display: none;
+            grid-column: 1 / -1;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* ── Lightbox ── */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #lightbox.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #lightbox-inner {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            transform: scale(0.92);
+            transition: transform 0.3s ease;
+        }
+
+        #lightbox.open #lightbox-inner {
+            transform: scale(1);
+        }
+
+        #lightbox-img {
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+            display: block;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        #lightbox-caption {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+
+        #lightbox-caption span {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.2rem;
+        }
+
+        #lightbox-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            color: var(--secondary);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        #lightbox-close:hover {
+            background: #a00028;
+        }
+
+        /* Lightbox arrow nav */
+        .lb-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212, 175, 55, 0.85);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: var(--primary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            z-index: 2;
+        }
+
+        .lb-arrow:hover {
+            background: var(--secondary);
+        }
+
+        #lb-prev {
+            left: -54px;
+        }
+
+        #lb-next {
+            right: -54px;
+        }
+
+        @media (max-width: 700px) {
+            #lb-prev {
+                left: 6px;
+            }
+
+            #lb-next {
+                right: 6px;
+            }
+        }
+
+        /* ── CTA Banner ── */
+        .cta-banner {
+            background: linear-gradient(135deg, #4a0012, #800020);
+            border-top: 4px solid var(--secondary);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .cta-banner h2 {
+            color: var(--secondary);
+            font-size: clamp(1.5rem, 4vw, 2.4rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-banner p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-wa-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 34px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn-wa-large:hover {
+            background: #1ebe5d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-wa-large i {
+            font-size: 1.3rem;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ── Pagination ── */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 3.5rem;
+            grid-column: 1 / -1;
+        }
+
+        .page-btn {
+            width: 42px;
+            height: 42px;
+            border: 2px solid var(--secondary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            border-radius: 50%;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-btn:hover:not(:disabled),
+        .page-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            border-color: var(--muted);
+            color: var(--muted);
+        }
+
+        .page-dots {
+            color: var(--muted);
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 0 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar injected by navbar.js -->
+
+    <!-- Lightbox -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <div id="lightbox-inner">
+            <button id="lightbox-close" aria-label="Close"><i class="fas fa-times"></i></button>
+            <button class="lb-arrow" id="lb-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+            <img id="lightbox-img" src="" alt="">
+            <button class="lb-arrow" id="lb-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            <div id="lightbox-caption">
+                <p id="lb-title"></p>
+                <span id="lb-cat"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <header class="page-header">
+        <div class="page-hero">
+            <div class="hero-ornament">
+                <span></span>
+                <i class="fas fa-images"></i>
+                <span></span>
+            </div>
+            <h1>Our Portfolio</h1>
+            <p>A glimpse of the craftsmanship we deliver — every stitch, a story</p>
+        </div>
+    </header>
+
+    <!-- Portfolio -->
+    <main class="portfolio-main">
+
+        <!-- Filter Bar -->
+        <div class="filter-bar reveal" id="filter-bar">
+            <button class="filter-btn active" data-filter="all">All Work</button>
+            <button class="filter-btn" data-filter="embroidery">Embroidery</button>
+            <button class="filter-btn" data-filter="stitching">Stitching</button>
+            <button class="filter-btn" data-filter="logos">Logo Work</button>
+            <button class="filter-btn" data-filter="alterations">Alterations</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid" id="gallery-grid">
+
+            <!-- Gallery items are generated by the script below -->
+            <div class="no-results" id="no-results" style="display:none;">
+                <i class="fas fa-images"></i>
+                <p>No items found in this category.</p>
+            </div>
+
+        </div><!-- /gallery-grid -->
+
+        <!-- Pagination Controls -->
+        <div id="pagination-controls" class="pagination"></div>
+
+    </main>
+
+    <!-- Bottom CTA -->
+    <section class="cta-banner">
+        <h2>Love What You See?</h2>
+        <p>Tell us what you'd like — we'll craft it just for you.</p>
+        <a href="https://wa.me/919867810550?text=Hi!%20I%20saw%20your%20portfolio%20and%20I%E2%80%99d%20like%20to%20discuss%20a%20custom%20order."
+            class="btn-wa-large" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Order a Custom Piece
+        </a>
+    </section>
+
+    <link rel="stylesheet" href="responsive.css">
+    <script src="navbar.js"></script>
+    <script src="whatsapp.js"></script>
+    <script>
+        // ── Gallery Data — all photos from PRODUCTS/ folder ──
+        // Categories cycle: embroidery, stitching, logos, alterations
+        const photos = [
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.42 PM.jpeg', t: 'Embroidery Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.45 PM (1).jpeg', t: 'Stitching Work', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.45 PM.jpeg', t: 'Logo Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.46 PM (1).jpeg', t: 'Alteration Work', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.46 PM (2).jpeg', t: 'Hand Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.46 PM (3).jpeg', t: 'Dress Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.46 PM.jpeg', t: 'Corporate Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.47 PM (1).jpeg', t: 'Saree Fall & Pico', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.47 PM.jpeg', t: 'Floral Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.48 PM (1).jpeg', t: 'Custom Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.48 PM.jpeg', t: 'Uniform Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.49 PM (1).jpeg', t: 'Sleeve Adjustment', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.49 PM.jpeg', t: 'Thread Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.50 PM.jpeg', t: 'Salwar Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.51 PM.jpeg', t: 'Cap Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.52 PM.jpeg', t: 'Hemming Work', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.54 PM.jpeg', t: 'Mirror Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.56 PM.jpeg', t: 'Ladies Suit', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.09.59 PM.jpeg', t: 'Brand Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.01 PM.jpeg', t: 'Pico Work', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.04 PM.jpeg', t: 'Zardozi Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.06 PM.jpeg', t: 'Bridal Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.07 PM.jpeg', t: 'School Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.08 PM.jpeg', t: 'Resize Work', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.10 PM.jpeg', t: 'Artisan Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.18 PM.jpeg', t: 'Evening Wear', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.20 PM (1).jpeg', t: 'Staff Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.20 PM (2).jpeg', t: 'Jacket Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.20 PM.jpeg', t: 'Sequin Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.21 PM (1).jpeg', t: 'Churidar Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.21 PM (2).jpeg', t: 'Bag Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.21 PM (3).jpeg', t: 'Saree Finishing', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.21 PM.jpeg', t: 'Needlework', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.22 PM.jpeg', t: 'Custom Dress', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.10.24 PM.jpeg', t: 'Tshirt Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.51 PM (1).jpeg', t: 'Precision Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.51 PM (2).jpeg', t: 'Silk Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.51 PM.jpeg', t: 'Fine Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.52 PM (1).jpeg', t: 'Corporate Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.52 PM (2).jpeg', t: 'Hemline Work', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.52 PM (3).jpeg', t: 'Ethnic Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.52 PM.jpeg', t: 'Salwar Kameez', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.54 PM.jpeg', t: 'Uniform Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.11.56 PM.jpeg', t: 'Waist Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.00 PM.jpeg', t: 'Decorative Stitch', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.02 PM.jpeg', t: 'Lehenga Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.05 PM.jpeg', t: 'Logo Patch', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.07 PM.jpeg', t: 'Blouse Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.09 PM.jpeg', t: 'Zari Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.11 PM.jpeg', t: 'Anarkali Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.14 PM.jpeg', t: 'Sports Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.16 PM.jpeg', t: 'Dupatta Finishing', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.20 PM.jpeg', t: 'Traditional Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.22 PM.jpeg', t: 'Indo-Western Stitch', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.23 PM.jpeg', t: 'Jacket Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.24 PM (1).jpeg', t: 'Kurti Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.24 PM.jpeg', t: 'Handcraft Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.25 PM (1).jpeg', t: 'Palazzo Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.25 PM.jpeg', t: 'Hoodie Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.28 PM (1).jpeg', t: 'Belt Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.28 PM.jpeg', t: 'Kashmiri Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.29 PM.jpeg', t: 'Saree Blouse Stitch', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.30 PM.jpeg', t: 'Apron Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.31 PM (1).jpeg', t: 'Cuff Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.31 PM.jpeg', t: 'Phulkari Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.32 PM.jpeg', t: 'Kids Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.34 PM.jpeg', t: 'Polo Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.35 PM.jpeg', t: 'Trouser Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.36 PM.jpeg', t: 'Bead Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.38 PM.jpeg', t: 'Gown Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.41 PM.jpeg', t: 'Patch Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.42 PM (1).jpeg', t: 'Lace Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.42 PM (2).jpeg', t: 'Chikankari Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.42 PM.jpeg', t: 'Kurti Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.45 PM (1).jpeg', t: 'Bag Logo Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.45 PM (2).jpeg', t: 'Collar Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.45 PM.jpeg', t: 'Aari Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.46 PM.jpeg', t: 'Party Wear Stitch', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.48 PM.jpeg', t: 'Name Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.52 PM (1).jpeg', t: 'Zip Replacement', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.52 PM (2).jpeg', t: 'Resham Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.52 PM.jpeg', t: 'Straight Cut Stitch', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.53 PM.jpeg', t: 'Vest Logo', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.57 PM.jpeg', t: 'Tuck Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.12.58 PM.jpeg', t: 'Cutwork Embroidery', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.00 PM.jpeg', t: 'Sharara Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.03 PM.jpeg', t: 'Monogram Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.06 PM.jpeg', t: 'Dart Adjustment', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.07 PM.jpeg', t: 'Shadow Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.08 PM.jpeg', t: 'Co-ord Set Stitch', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.11 PM (1).jpeg', t: 'Crest Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.11 PM (2).jpeg', t: 'Lining Alteration', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.11 PM.jpeg', t: 'Kantha Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.12 PM.jpeg', t: 'Formal Stitching', c: 'stitching' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.15 PM.jpeg', t: 'Badge Embroidery', c: 'logos' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.16 PM.jpeg', t: 'Button Replacement', c: 'alterations' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.18 PM.jpeg', t: 'Crewel Work', c: 'embroidery' },
+            { f: 'WhatsApp Image 2026-03-07 at 7.13.21 PM.jpeg', t: 'Maxi Dress Stitch', c: 'stitching' },
+        ];
+
+        // ── Build gallery items from data ──
+        const grid = document.getElementById('gallery-grid');
+        const noResults = document.getElementById('no-results');
+        const catLabels = { embroidery: 'Embroidery', stitching: 'Stitching', logos: 'Logo Work', alterations: 'Alterations' };
+
+        let galleryItems; // populated after generation
+
+        photos.forEach(p => {
+            const src = 'https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/' + encodeURIComponent(p.f);
+            const div = document.createElement('div');
+            div.className = 'gallery-item reveal';
+            div.dataset.category = p.c;
+            div.dataset.title = p.t;
+            div.dataset.src = src;
+            div.innerHTML = `
+                <img src="${src}" alt="${p.t}" loading="lazy">
+                <div class="item-overlay">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                    <h3>${p.t}</h3>
+                    <span>${catLabels[p.c]}</span>
+                </div>`;
+            grid.insertBefore(div, noResults);
+        });
+
+        galleryItems = document.querySelectorAll('.gallery-item');
+
+        // ── Scroll Reveal ──
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('active'), i * 30);
+                    revealObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // ── Pagination & Filtering Logic ──
+        const ITEMS_PER_PAGE = 10;
+        let currentPage = 1;
+        let currentFilter = 'all';
+        const paginationContainer = document.getElementById('pagination-controls');
+
+        function updateGallery() {
+            let visibleCount = 0;
+            const filteredNodes = [];
+
+            // Step 1: Filter
+            galleryItems.forEach(item => {
+                const match = currentFilter === 'all' || item.dataset.category === currentFilter;
+                if (match) {
+                    item.classList.remove('filtered-out');
+                    filteredNodes.push(item);
+                } else {
+                    item.classList.add('filtered-out');
+                    item.classList.add('page-hidden');
+                }
+            });
+
+            // Step 2: Paginate
+            const totalPages = Math.ceil(filteredNodes.length / ITEMS_PER_PAGE);
+            if (currentPage > totalPages) currentPage = totalPages || 1;
+
+            const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIdx = startIdx + ITEMS_PER_PAGE;
+
+            filteredNodes.forEach((item, index) => {
+                if (index >= startIdx && index < endIdx) {
+                    item.classList.remove('page-hidden');
+                    // re-trigger reveal for items that just became visible
+                    if (!item.classList.contains('active')) {
+                        revealObserver.observe(item);
+                    }
+                } else {
+                    item.classList.add('page-hidden');
+                }
+            });
+
+            noResults.style.display = filteredNodes.length === 0 ? 'block' : 'none';
+            renderPagination(totalPages);
+        }
+
+        function renderPagination(totalPages) {
+            paginationContainer.innerHTML = '';
+            if (totalPages <= 1) return;
+
+            const createBtn = (html, disabled, onClick, isActive = false) => {
+                const btn = document.createElement('button');
+                btn.className = 'page-btn' + (isActive ? ' active' : '');
+                btn.innerHTML = html;
+                btn.disabled = disabled;
+                if (!disabled) btn.onclick = onClick;
+                return btn;
+            };
+
+            const scrollToTop = () => {
+                const headerOffset = 150;
+                const elementPosition = document.getElementById('filter-bar').getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            };
+
+            // Prev
+            paginationContainer.appendChild(
+                createBtn('<i class="fas fa-chevron-left"></i>', currentPage === 1, () => {
+                    currentPage--; updateGallery(); scrollToTop();
+                })
+            );
+
+            // Page Numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (totalPages > 6) {
+                    if (i !== 1 && i !== totalPages && Math.abs(i - currentPage) > 1) {
+                        if (i === 2 && currentPage > 3) {
+                            const dots = document.createElement('span');
+                            dots.className = 'page-dots';
+                            dots.innerText = '...';
+                            paginationContainer.appendChild(dots);
+                        }
+                        if (i === totalPages - 1 && currentPage < totalPages - 2) {
+                            const dots = document.createElement('span');
+                            dots.className = 'page-dots';
+                            dots.innerText = '...';
+                            paginationContainer.appendChild(dots);
+                        }
+                        continue;
+                    }
+                }
+                paginationContainer.appendChild(
+                    createBtn(i, false, () => { currentPage = i; updateGallery(); scrollToTop(); }, i === currentPage)
+                );
+            }
+
+            // Next
+            paginationContainer.appendChild(
+                createBtn('<i class="fas fa-chevron-right"></i>', currentPage === totalPages, () => {
+                    currentPage++; updateGallery(); scrollToTop();
+                })
+            );
+        }
+
+        // ── Filter Binding ──
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                currentPage = 1; // reset to page 1 on filter
+                updateGallery();
+            });
+        });
+
+        // Initialize gallery state
+        updateGallery();
+
+        // ── Lightbox ──
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        const lbTitle = document.getElementById('lb-title');
+        const lbCat = document.getElementById('lb-cat');
+
+        // Build reference list of visible items on current page
+        let visibleItems = () => [...galleryItems].filter(i => !i.classList.contains('filtered-out') && !i.classList.contains('page-hidden'));
+        let currentIndex = 0;
+
+        function openLightbox(item) {
+            const src = item.dataset.src || item.querySelector('img').src;
+            lbImg.src = src;
+            lbImg.alt = item.dataset.title || '';
+            lbTitle.textContent = item.dataset.title || '';
+            lbCat.textContent = item.dataset.category ? item.dataset.category.charAt(0).toUpperCase() + item.dataset.category.slice(1) : '';
+            const vi = visibleItems();
+            currentIndex = vi.indexOf(item);
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(() => { lbImg.src = ''; }, 300);
+        }
+
+        function navigate(dir) {
+            const vi = visibleItems();
+            currentIndex = (currentIndex + dir + vi.length) % vi.length;
+            openLightbox(vi[currentIndex]);
+        }
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => openLightbox(item));
+        });
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); navigate(-1); });
+        document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); navigate(1); });
+
+        // Close on backdrop click
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Keyboard: Esc = close, arrows = navigate
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigate(-1);
+            if (e.key === 'ArrowRight') navigate(1);
+        });
+    </script>
+</body>
+
+</html>
