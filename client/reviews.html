@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,15 @@
     <style>
         /* CSS Variables for Theme */
         :root {
-            --primary-color: #5D4037; /* Dark Brown/Thread color */
-            --accent-color: #D4AF37; /* Gold */
-            --bg-color: #FDFBF7; /* Off-white/Fabric */
+            --primary-color: #5D4037;
+            /* Dark Brown/Thread color */
+            --accent-color: #D4AF37;
+            /* Gold */
+            --bg-color: #FDFBF7;
+            /* Off-white/Fabric */
             --card-bg: #FFFFFF;
             --text-color: #333;
-            --soft-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            --soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             --stitch-border: 2px dashed #D4AF37;
         }
 
@@ -27,7 +31,9 @@
         }
 
         /* Typography */
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-family: 'Georgia', serif;
             color: var(--primary-color);
         }
@@ -44,7 +50,8 @@
             text-align: center;
             padding: 60px 20px;
             background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
-            background-size: 20px 20px; /* Fabric texture effect */
+            background-size: 20px 20px;
+            /* Fabric texture effect */
         }
 
         .hero h1 {
@@ -89,7 +96,10 @@
         .review-card::before {
             content: '';
             position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
             border: 1px dashed #e0e0e0;
             border-radius: 8px;
             pointer-events: none;
@@ -152,7 +162,9 @@
             color: var(--primary-color);
         }
 
-        input, textarea, select {
+        input,
+        textarea,
+        select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -162,7 +174,9 @@
             box-sizing: border-box;
         }
 
-        input:focus, textarea:focus, select:focus {
+        input:focus,
+        textarea:focus,
+        select:focus {
             outline: none;
             border-color: var(--accent-color);
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
@@ -198,17 +212,60 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 60px;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--accent-color);
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:hover:not(:disabled),
+        .page-btn.active {
+            background: var(--accent-color);
+            color: #fff;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            border-color: #ccc;
+            color: #999;
+        }
+
+        .page-dots {
+            color: #999;
+            font-weight: bold;
+            padding: 0 4px;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
-        
+
         <!-- Hero Section -->
         <section class="hero">
             <div class="icon-decoration">
@@ -226,6 +283,9 @@
                 <p style="margin-top: 10px;">Loading reviews...</p>
             </div>
         </section>
+
+        <!-- Pagination Controls -->
+        <div id="reviews-pagination" class="pagination"></div>
 
         <!-- Review Submission Form -->
         <section class="review-form-section reveal">
@@ -253,7 +313,8 @@
 
                 <div class="form-group">
                     <label for="message">Your Review</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Tell us about your experience..." required></textarea>
+                    <textarea id="message" name="message" rows="5" placeholder="Tell us about your experience..."
+                        required></textarea>
                 </div>
 
                 <button type="submit" class="submit-btn">Submit Review</button>
@@ -271,4 +332,5 @@
     <script src="animations.js"></script>
     <script src="reviews.js"></script>
 </body>
+
 </html>
