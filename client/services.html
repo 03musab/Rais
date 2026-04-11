@@ -342,6 +342,22 @@
                 justify-content: center;
             }
         }
+
+        .loading-message {
+            text-align: center;
+            padding: 3rem;
+            color: var(--muted);
+            font-size: 1.1rem;
+            grid-column: 1 / -1;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 3rem;
+            color: #c00;
+            font-size: 1rem;
+            grid-column: 1 / -1;
+        }
     </style>
 </head>
 
@@ -370,141 +386,9 @@
             <div class="gold-rule"><i class="fas fa-gem"></i></div>
         </div>
 
-        <div class="services-grid">
-
-            <!-- 1. Custom Embroidery -->
-            <div class="service-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.42%20PM.jpeg" alt="Custom Embroidery"
-                        loading="lazy">
-                    <span class="card-badge">Popular</span>
-                    <div class="card-icon"><i class="fas fa-star"></i></div>
-                </div>
-                <div class="card-body">
-                    <h3>Custom Embroidery</h3>
-                    <p>Bring your unique ideas to life with our bespoke embroidery service. We work on any fabric — from
-                        casual wear to bridal pieces.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Custom%20Embroidery.%20Can%20you%20tell%20me%20more%3F"
-                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
-                </div>
-            </div>
-
-            <!-- 2. Logo Embroidery -->
-            <div class="service-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.45%20PM.jpeg" alt="Logo Embroidery"
-                        loading="lazy">
-                    <span class="card-badge">Corporate</span>
-                    <div class="card-icon"><i class="fas fa-building"></i></div>
-                </div>
-                <div class="card-body">
-                    <h3>Logo Embroidery</h3>
-                    <p>Professional, high-quality logo stitching for corporate uniforms, caps, bags, and branded
-                        merchandise. Bulk orders welcome.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Logo%20Embroidery.%20Can%20you%20tell%20me%20more%3F"
-                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
-                </div>
-            </div>
-
-            <!-- 3. Handcrafted Designs -->
-            <div class="service-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.46%20PM.jpeg" alt="Handcrafted Designs"
-                        loading="lazy">
-                    <span class="card-badge">Artisan</span>
-                    <div class="card-icon"><i class="fas fa-hands"></i></div>
-                </div>
-                <div class="card-body">
-                    <h3>Handcrafted Designs</h3>
-                    <p>Traditional hand-embroidery techniques — mirror work, zardozi, thread art — adding an artistic
-                        and personal touch to every piece.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Handcrafted%20Designs.%20Can%20you%20tell%20me%20more%3F"
-                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
-                </div>
-            </div>
-
-
-
-            <!-- 5. Dress Stitching -->
-            <div class="service-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.46%20PM%20(2).jpeg" alt="Dress Stitching"
-                        loading="lazy">
-                    <span class="card-badge">Popular</span>
-                    <div class="card-icon"><i class="fas fa-tshirt"></i></div>
-                </div>
-                <div class="card-body">
-                    <h3>Dress Stitching</h3>
-                    <p>Custom tailoring for dresses, salwar suits, and churidars — ensuring a perfect fit and flattering
-                        silhouette tailored just for you.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Dress%20Stitching.%20Can%20you%20tell%20me%20more%3F"
-                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
-                </div>
-            </div>
-
-            <!-- 6. Alteration Services -->
-            <div class="service-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.46%20PM%20(3).jpeg" alt="Alteration Services"
-                        loading="lazy">
-                    <div class="card-icon"><i class="fas fa-ruler"></i></div>
-                </div>
-                <div class="card-body">
-                    <h3>Alteration Services</h3>
-                    <p>Expert resizing, hemming, and adjustments to give your existing wardrobe a perfect new fit and a
-                        fresh lease on life.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Alteration%20Services.%20Can%20you%20tell%20me%20more%3F"
-                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
-                </div>
-            </div>
-
-            <!-- 7. Uniform Embroidery -->
-            <div class="service-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.47%20PM.jpeg" alt="Uniform Embroidery"
-                        loading="lazy">
-                    <span class="card-badge">Bulk</span>
-                    <div class="card-icon"><i class="fas fa-user-tie"></i></div>
-                </div>
-                <div class="card-body">
-                    <h3>Uniform Embroidery</h3>
-                    <p>Durable and consistent embroidery solutions for school uniforms, staff shirts, and institutional
-                        garments at competitive bulk rates.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Uniform%20Embroidery.%20Can%20you%20tell%20me%20more%3F"
-                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
-                </div>
-            </div>
-
-            <!-- 8. Machine Embroidery -->
-            <div class="service-card reveal">
-                <div class="card-img-wrap">
-                    <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.09.47%20PM%20(1).jpeg" alt="Machine Embroidery"
-                        loading="lazy">
-                    <div class="card-icon"><i class="fas fa-cog"></i></div>
-                </div>
-                <div class="card-body">
-                    <h3>Machine Embroidery</h3>
-                    <p>Precision machine work ideal for intricate patterns, repeated designs, and larger volume orders
-                        with consistent quality throughout.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="https://wa.me/919867810550?text=Hi!%20I%E2%80%99m%20interested%20in%20Machine%20Embroidery.%20Can%20you%20tell%20me%20more%3F"
-                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
-                </div>
-            </div>
-
+        <div class="services-grid" id="services-grid">
+            <div id="services-loading" class="loading-message">Loading services...</div>
+            <div id="services-error" class="error-message" style="display:none;">Failed to load services. Please refresh.</div>
         </div><!-- /services-grid -->
     </main>
 
@@ -522,17 +406,93 @@
     <script src="navbar.js"></script>
     <script src="whatsapp.js"></script>
     <script>
-        // Scroll Reveal
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('active'), i * 80);
-                    observer.unobserve(entry.target);
+        const CRM_API_URL = 'https://rais-crm.onrender.com/api/services';
+
+        const iconMap = {
+            star: 'fa-star',
+            building: 'fa-building',
+            hands: 'fa-hands',
+            tshirt: 'fa-tshirt',
+            ruler: 'fa-ruler',
+            'user-tie': 'fa-user-tie',
+            cog: 'fa-cog'
+        };
+
+        function getIconClass(icon) {
+            return iconMap[icon] || 'fa-star';
+        }
+
+        function createServiceCard(service, index) {
+            const badgeHtml = service.badge 
+                ? `<span class="card-badge">${service.badge}</span>` 
+                : '';
+            
+            const card = document.createElement('div');
+            card.className = 'service-card reveal';
+            card.style.transitionDelay = `${index * 0.1}s`;
+            card.innerHTML = `
+                <div class="card-img-wrap">
+                    <img src="${service.imageUrl}" alt="${service.title}" loading="lazy">
+                    ${badgeHtml}
+                    <div class="card-icon"><i class="fas ${getIconClass(service.icon)}"></i></div>
+                </div>
+                <div class="card-body">
+                    <h3>${service.title}</h3>
+                    <p>${service.description}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://wa.me/919867810550?text=${encodeURIComponent(service.whatsappMessage)}"
+                        class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Enquire Now</a>
+                </div>
+            `;
+            return card;
+        }
+
+        async function loadServices() {
+            const grid = document.getElementById('services-grid');
+            const loading = document.getElementById('services-loading');
+            const error = document.getElementById('services-error');
+
+            try {
+                const response = await fetch(CRM_API_URL);
+                if (!response.ok) throw new Error('Failed to fetch');
+                
+                const services = await response.json();
+                
+                loading.style.display = 'none';
+                
+                if (services.length === 0) {
+                    grid.innerHTML = '<div class="loading-message">No services available</div>';
+                    return;
                 }
-            });
-        }, { threshold: 0.12 });
-        reveals.forEach(el => observer.observe(el));
+
+                services.forEach((service, index) => {
+                    grid.appendChild(createServiceCard(service, index));
+                });
+
+                // Re-initialize scroll reveal
+                setTimeout(() => {
+                    const reveals = document.querySelectorAll('.reveal:not(.active)');
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach((entry, i) => {
+                            if (entry.isIntersecting) {
+                                setTimeout(() => entry.target.classList.add('active'), i * 80);
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.12 });
+                    reveals.forEach(el => observer.observe(el));
+                }, 100);
+
+            } catch (err) {
+                console.error('Error loading services:', err);
+                loading.style.display = 'none';
+                error.style.display = 'block';
+            }
+        }
+
+        // Load services on page load
+        document.addEventListener('DOMContentLoaded', loadServices);
     </script>
 </body>
 
