@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, "../client")));
 app.use("/api/contact", require("./routes/contact.routes"));
 app.use("/api/reviews", require("./routes/review.routes"));
 app.use("/api/portfolio", require("./routes/portfolio.routes"));
+app.use("/api/featured-products", require("./routes/featured-products.routes"));
 
 // Fallback Route (Serve index.html for any other request)
 app.get("*", (req, res) => {
