@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     try {
         const { data, error } = await supabase
             .from('products')
-            .select('id, title, category, image_url, imageUrl')
+            .select('id, title, category, image_url')
             .order('created_at', { ascending: false });
 
         if (error) throw error;
