@@ -878,12 +878,14 @@
     <script src="animations.js"></script>
     <script>
         /* ── Recent Masterpieces: Load from CRM ── */
+        const CRM_API_URL = 'https://rais-crm.onrender.com/api/portfolio';
+
         (async function loadMasterpieces() {
             const grid = document.getElementById('masterpieces-grid');
             if (!grid) return;
 
             try {
-                const res = await fetch('/api/portfolio');
+                const res = await fetch(CRM_API_URL);
                 if (!res.ok) throw new Error('fetch failed');
                 const items = await res.json();
 
