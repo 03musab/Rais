@@ -837,19 +837,11 @@
 
     <section class="gallery">
         <h2 class="reveal">Recent Masterpieces</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item reveal" style="transition-delay: 0.1s;">
-                <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.12.52%20PM%20(1).jpeg" alt="Embroidery Close-up">
-            </div>
-            <div class="gallery-item reveal" style="transition-delay: 0.2s;">
-                <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.11.54%20PM.jpeg" alt="Uniform Logo Work">
-            </div>
-            <div class="gallery-item reveal" style="transition-delay: 0.3s;">
-                <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.10.10%20PM.jpeg" alt="Artisan Embroidery">
-            </div>
-            <div class="gallery-item reveal" style="transition-delay: 0.4s;">
-                <img src="https://wnydpsgeiunsbfoutpwh.supabase.co/storage/v1/object/public/products/WhatsApp%20Image%202026-03-07%20at%207.13.18%20PM.jpeg" alt="Premium Craft Work">
-            </div>
+        <div class="gallery-grid" id="masterpieces-grid">
+            <!-- Loaded dynamically from /api/portfolio -->
+        </div>
+        <div style="text-align:center; margin-top: 2.5rem;">
+            <a href="portfolio.html" class="btn btn-filled reveal" style="display:inline-block;">View Full Portfolio</a>
         </div>
     </section>
 
@@ -884,6 +876,53 @@
     </script>
     <script src="navbar.js"></script>
     <script src="animations.js"></script>
+    <script>
+        /* ── Recent Masterpieces: Load from CRM ── */
+        (async function loadMasterpieces() {
+            const grid = document.getElementById('masterpieces-grid');
+            if (!grid) return;
+
+            try {
+                const res = await fetch('/api/portfolio');
+                if (!res.ok) throw new Error('fetch failed');
+                const items = await res.json();
+
+                // Show latest 6
+                const latest = items.slice(0, 6);
+                if (!latest.length) return;
+
+                grid.innerHTML = '';
+                latest.forEach((item, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'gallery-item reveal';
+                    div.style.transitionDelay = `${(i + 1) * 0.1}s`;
+                    div.style.cursor = 'pointer';
+                    div.title = item.title || '';
+                    div.innerHTML = `<img src="${item.imageUrl}" alt="${item.title || 'Masterpiece'}" loading="lazy">`;
+                    div.addEventListener('click', () => { window.location.href = 'portfolio.html'; });
+                    grid.appendChild(div);
+                });
+
+                // Re-trigger scroll reveal for new items
+                setTimeout(() => {
+                    const reveals = grid.querySelectorAll('.reveal:not(.active)');
+                    const observer = new IntersectionObserver(entries => {
+                        entries.forEach((e, idx) => {
+                            if (e.isIntersecting) {
+                                setTimeout(() => e.target.classList.add('active'), idx * 80);
+                                observer.unobserve(e.target);
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    reveals.forEach(el => observer.observe(el));
+                }, 100);
+
+            } catch (err) {
+                console.warn('Masterpieces: could not load from API', err);
+                // Silently fail — section is simply empty
+            }
+        })();
+    </script>
     <script>
         /* ── Hero: Gold Particle Canvas ── */
         (function () {
