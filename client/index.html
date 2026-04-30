@@ -319,6 +319,22 @@
             transform: translateY(0) scale(1);
         }
 
+        .loading-message {
+            text-align: center;
+            padding: 3rem;
+            color: var(--muted, #666);
+            font-size: 1.1rem;
+            grid-column: 1 / -1;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 3rem;
+            color: #c00;
+            font-size: 1rem;
+            grid-column: 1 / -1;
+        }
+
         /* Embroidery Separator Animation */
         .embroidery-separator {
             display: flex;
@@ -838,7 +854,8 @@
     <section class="gallery">
         <h2 class="reveal">Recent Masterpieces</h2>
         <div class="gallery-grid" id="masterpieces-grid">
-            <!-- Loaded dynamically from CRM -->
+            <div id="masterpieces-loading" class="loading-message">Loading masterpieces...</div>
+            <div id="masterpieces-error" class="error-message" style="display:none;">Failed to load. Please refresh.</div>
         </div>
         <div style="text-align:center; margin-top: 2.5rem;">
             <a href="portfolio.html" class="btn btn-filled reveal" style="display:inline-block;">View Full Portfolio</a>
@@ -882,6 +899,8 @@
 
         (async function loadMasterpieces() {
             const grid = document.getElementById('masterpieces-grid');
+            const loading = document.getElementById('masterpieces-loading');
+            const error = document.getElementById('masterpieces-error');
             if (!grid) return;
 
             try {
@@ -889,9 +908,14 @@
                 if (!res.ok) throw new Error('fetch failed');
                 const items = await res.json();
 
+                if (loading) loading.style.display = 'none';
+
                 // Show latest 6
                 const latest = items.slice(0, 6);
-                if (!latest.length) return;
+                if (!latest.length) {
+                    grid.innerHTML = '<div class="loading-message">No masterpieces yet.</div>';
+                    return;
+                }
 
                 grid.innerHTML = '';
                 latest.forEach((item, i) => {
@@ -921,7 +945,8 @@
 
             } catch (err) {
                 console.warn('Masterpieces: could not load from API', err);
-                // Silently fail — section is simply empty
+                if (loading) loading.style.display = 'none';
+                if (error) error.style.display = 'block';
             }
         })();
     </script>
