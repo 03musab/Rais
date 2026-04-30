@@ -835,17 +835,6 @@
         </div>
     </section>
 
-    <section class="gallery" id="featured-section">
-        <h2 class="reveal">Featured Products</h2>
-        <div class="services-grid" id="featured-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
-            <div id="featured-loading" class="loading-message">Loading featured products...</div>
-            <div id="featured-error" class="error-message" style="display:none;">Failed to load featured products.</div>
-        </div>
-        <div style="text-align:center; margin-top: 2.5rem;">
-            <a href="portfolio.html" class="btn btn-filled reveal" style="display:inline-block;">View Full Portfolio</a>
-        </div>
-    </section>
-
     <section class="gallery">
         <h2 class="reveal">Recent Masterpieces</h2>
         <div class="gallery-grid" id="masterpieces-grid">
@@ -887,71 +876,6 @@
     </script>
     <script src="navbar.js"></script>
     <script src="animations.js"></script>
-    <script>
-        /* ── Featured Products: Load from CRM ── */
-        const FEATURED_API_URL = 'https://rais-crm.onrender.com/api/featured-products';
-
-        (async function loadFeaturedProducts() {
-            const grid = document.getElementById('featured-grid');
-            const loading = document.getElementById('featured-loading');
-            const error = document.getElementById('featured-error');
-            if (!grid) return;
-
-            try {
-                const res = await fetch(FEATURED_API_URL);
-                if (!res.ok) throw new Error('fetch failed');
-                const items = await res.json();
-
-                if (loading) loading.style.display = 'none';
-
-                if (!items.length) {
-                    grid.innerHTML = '<div class="loading-message">No featured products yet.</div>';
-                    return;
-                }
-
-                items.forEach((item, i) => {
-                    const div = document.createElement('div');
-                    div.className = 'service-card reveal';
-                    div.style.transitionDelay = `${i * 0.1}s`;
-                    div.innerHTML = `
-                        <div class="card-img-wrap">
-                            <img src="${item.imageUrl}" alt="${item.title || 'Featured Product'}" loading="lazy">
-                            <div class="card-badge">Featured</div>
-                            <div class="card-icon"><i class="fas fa-star"></i></div>
-                        </div>
-                        <div class="card-body">
-                            <h3>${item.title || 'Untitled'}</h3>
-                            <p>${item.category ? item.category.charAt(0).toUpperCase() + item.category.slice(1) : 'Embroidery'}</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="portfolio.html" class="btn-wa"><i class="fas fa-eye"></i> View Details</a>
-                        </div>
-                    `;
-                    grid.appendChild(div);
-                });
-
-                // Re-trigger scroll reveal
-                setTimeout(() => {
-                    const reveals = grid.querySelectorAll('.reveal:not(.active)');
-                    const observer = new IntersectionObserver(entries => {
-                        entries.forEach((e, idx) => {
-                            if (e.isIntersecting) {
-                                setTimeout(() => e.target.classList.add('active'), idx * 80);
-                                observer.unobserve(e.target);
-                            }
-                        });
-                    }, { threshold: 0.1 });
-                    reveals.forEach(el => observer.observe(el));
-                }, 100);
-
-            } catch (err) {
-                console.warn('Featured products: could not load from API', err);
-                if (loading) loading.style.display = 'none';
-                if (error) error.style.display = 'block';
-            }
-        })();
-    </script>
-
     <script>
         /* ── Recent Masterpieces: Load from CRM ── */
         const CRM_API_URL = 'https://rais-crm.onrender.com/api/portfolio';
